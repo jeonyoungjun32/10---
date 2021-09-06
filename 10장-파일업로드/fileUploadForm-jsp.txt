@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FileUpload Form</title>
+<style>
+	#uploadFormArea{
+	 margin : auto;
+	 width : 350px;
+	 border : 1px solid black;
+	}
+	
+	.td_title{
+		font-size:xx-large;
+		text-align: center;
+	}
+	
+</style>
+</head>
+<body>
+<!-- 1.서블릿에 요청해 파일 업로드, 요청방식은 post로 해야 함. 그래야 용량에 제한없이 파일 전송 가능
+ 2. enctype은 "multipart/form-data"로 설정
+ 이 타입을 지정하지 않으면 파일 선택박스에서 선택된 파일 객체가 전송되는 것이 아니고
+ 파일이름만 문자열 형태로 서버로 전송되기 때문에 업로드 기능을 제대로 구현할 수 없다. -->
+<section id = "uploadFormArea">
+<form action="fileUpload.jsp" method="post" enctype="multipart/form-data">
+	<table>
+		<tr>
+			<td colspan="2" class="td_title">파일 업로드 폼</td>
+		</tr>
+		<tr>
+			<td>올린 사람</td>
+			<td><input type="text" name="user"></td>
+		</tr>
+		<tr>
+			<td>제목</td>
+			<td><input type="text" name="subject"></td>
+		</tr>
+		<tr>
+			<td>파일명1</td>
+			<td><input type="file" name="fileName1"></td>
+		</tr>
+		<tr>
+			<td>파일명2</td>
+			<td><input type="file" name="fileName2"></td>
+		</tr>
+		<tr>
+			<th colspan="2">
+				<input type="submit" value="전송">
+			</th>
+		</tr>
+	</table>
+</form>
+</section>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import ="com.oreilly.servlet.MultipartRequest" %>    
+<%@ page import ="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>    
+<%
+//1.먼저, WebContent에 upload 폴더 만들기
+
+//2.파일을 업로드할 "서버상의 실제 경로"를 구해온다.
+//String uploadPath=request.getRealPath("/upload");//권장하지 않는 메서드
+ServletContext context=request.getServletContext();
+String uploadPath=context.getRealPath("/upload");
+out.println("서버상의 실제 경로(절대경로):" + uploadPath);//--> 주석처리함
+
+int size=10*1024*1024;//3.한번에 올릴 수 있는 최대 파일용량 10M로 제한(파일 여러 개 업로드 시 각 용량을 합친 크기)
+
+String user="";//올린 사람 이름
+String subject="";//제목
+
+//혜-309p 참조
+MultipartRequest multi=new MultipartRequest(request,//폼에서 전달된 파라미터 값을 얻기 위해
+		uploadPath,//파일을 업로드 할 서버상의 실제 디렉토리명
+		size,//한번에 올릴 수 있는 최대 파일용량(이 크기를 넘는 파일이 전송되어 올 경우 Exception이 발생하여 업로드x)
+		"UTF-8",//파일이름이 한글일 경우 한글을 제대로 인식되게 하기 위해
+		new DefaultFileRenamePolicy()
+		//예)서버상에 a.txt가 기존에 있음. 올릴 동일파일명에 자동 인덱스 부여(a1.txt)하여 파일이름 중복을 피하게 해 줌
+		);
+		
+		
+%>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
